@@ -51,7 +51,7 @@ func (n *NatsEventStore) encodeMessage(m Message) ([]byte, error) {
 	return b.Bytes(), nil
 }
 
-func (n *NatsEventStore) PublishCreatedFeed(ctx context.Context, feed models.Feed) error {
+func (n *NatsEventStore) PublishCreatedFeed(ctx context.Context, feed *models.Feed) error {
 	msg := CreatedFeedMessage{
 		ID:          feed.ID,
 		Title:       feed.Title,
