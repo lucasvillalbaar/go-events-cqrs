@@ -19,36 +19,28 @@ func onCreatedFeed(m events.CreatedFeedMessage) {
 		Description: m.Description,
 		CreatedAt:   m.CreatedAt,
 	}
-
-	if err := search.IndexFeed(context.Background(), &feed); err != nil {
-		log.Print("failed to index feed:%v", err)
+	if err := search.IndexFeed(context.Background(), feed); err != nil {
+		log.Println(err)
 	}
 }
 
 func listFeedsHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-
 	var err error
-
 	feeds, err := repository.ListFeeds(ctx)
-
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
-
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(feeds)
-
 }
 
-func searcHandler(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
+func searchHandler(w http.ResponseWriter, r *http.Request) {
 	var err error
-
+	ctx := r.Context()
 	query := r.URL.Query().Get("q")
-
 	if len(query) == 0 {
 		http.Error(w, "query is required", http.StatusBadRequest)
 		return
@@ -59,7 +51,6 @@ func searcHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
-
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(feeds)

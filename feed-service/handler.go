@@ -17,7 +17,7 @@ type createdFeedRequest struct {
 	Description string `json:"description"`
 }
 
-func createdFeedHandler(w http.ResponseWriter, r *http.Request) {
+func createFeedHandler(w http.ResponseWriter, r *http.Request) {
 	var req createdFeedRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
