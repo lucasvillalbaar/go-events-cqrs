@@ -24,7 +24,7 @@ type Config struct {
 func main() {
 	var cfg Config
 
-	err := envconfig.Process("", cfg)
+	err := envconfig.Process("", &cfg)
 
 	if err != nil {
 		log.Fatalf("%v", err)
