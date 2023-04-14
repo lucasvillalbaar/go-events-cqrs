@@ -7,6 +7,7 @@ require github.com/olivere/elastic v6.2.37+incompatible
 require (
 	github.com/elastic/go-elasticsearch/v7 v7.17.7 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
+	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/kelseyhightower/envconfig v1.4.0 // indirect
 	github.com/lib/pq v1.10.7 // indirect
